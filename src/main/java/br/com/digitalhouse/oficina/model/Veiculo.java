@@ -3,18 +3,16 @@ package br.com.digitalhouse.oficina.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-
-
 
 @Entity
 @Table(name = "veiculos")
 public class Veiculo {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(length = 7, nullable = false)
@@ -27,7 +25,6 @@ public class Veiculo {
 	@Column(length = 30, nullable = false)
 	private String marca;
 
-	
 	public Veiculo() {}
 	
 	public Veiculo(Long id, String placa, String cor, String modelo, String marca) {
@@ -96,15 +93,8 @@ public class Veiculo {
 			return false;
 		Veiculo other = (Veiculo) obj;
 		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+			return other.id == null;
+		} else return id.equals(other.id);
 	}
 
-	
-	
-	
-	
 }
